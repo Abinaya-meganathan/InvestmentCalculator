@@ -1,0 +1,69 @@
+﻿@model InvestmentCalculator.Models.InvestmentModel
+<div class="container d-flex align-items-center justify-content-center py-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card calculator-card shadow-lg">
+            <div class="card-body p-4 p-md-5">
+
+                <div class="text-center mb-4">
+                    <div class="mb-2" style="font-size:2rem;">🌱</div>
+                    <h4 class="mb-1">Investment Calculator</h4>
+                    <p style="font-size:0.82rem;color:#5a8a72;margin:0;">Estimate your wealth growth over time</p>
+                </div>
+
+                <form method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Investment Type</label>
+                        <select asp-for="InvestmentType" class="form-select">
+                            <option value="LumpSum">Lump Sum</option>
+                            <option value="SIP">SIP (Monthly)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Amount (₹)</label>
+                        <input asp-for="Amount" class="form-control" placeholder="e.g. 5000" />
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label class="form-label">Interest Rate (%)</label>
+                            <input asp-for="InterestRate" class="form-control" placeholder="e.g. 12" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Years</label>
+                            <input asp-for="Years" class="form-control" placeholder="e.g. 10" />
+                        </div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Calculate Returns →
+                        </button>
+                    </div>
+
+                </form>
+
+                @if (Model != null && Model.FinalAmount > 0)
+                {
+                    <hr />
+                    <div class="result-box mt-2">
+                        <p class="invested">
+                            <strong>Total Invested</strong>
+                            <span class="val">₹@Model.TotalInvested.ToString("N0")</span>
+                        </p>
+                        <p class="returns">
+                            <strong>Total Value</strong>
+                            <span class="val">₹@Model.FinalAmount.ToString("N0")</span>
+                        </p>
+                        <p class="profit">
+                            <strong>Net Profit</strong>
+                            <span class="val">₹@Model.Profit.ToString("N0")</span>
+                        </p>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
